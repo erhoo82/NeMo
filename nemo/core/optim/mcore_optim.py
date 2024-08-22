@@ -82,9 +82,6 @@ class McoreDistributedOptimizer(torch.optim.Optimizer):
     def load_parameter_state(self, filename: str):
         self.mcore_optimizer.load_parameter_state(filename)
 
-    def finish_param_sync(self, model_index):
-        self.mcore_optimizer.finish_param_sync(model_index)
-
     def disable_pre_hook(self):
         self.mcore_optimizer.disable_pre_hook()
 
