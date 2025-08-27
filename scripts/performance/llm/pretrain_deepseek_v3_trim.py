@@ -15,6 +15,8 @@
 from os.path import basename, splitext
 from typing import List, Optional
 
+import torch
+
 import nemo_run as run
 
 from nemo.collections.llm.recipes.deepseek_v3 import pretrain_recipe
@@ -128,7 +130,7 @@ def override_recipe_configs(
         etp_size,
         enable_cuda_graphs=enable_cuda_graphs,
         use_mcore_fsdp=use_mcore_fsdp,
-        use_fsdp_double_buffer=args.use_fsdp_double_buffer,
+        use_fsdp_double_buffer=False,
         use_user_buffer_registration=use_user_buffer_registration,
         use_sharp=use_sharp,
         recompute_layers=recompute_layers,
