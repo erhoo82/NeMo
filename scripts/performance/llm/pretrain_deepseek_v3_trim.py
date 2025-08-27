@@ -79,8 +79,7 @@ def override_recipe_configs(
         recipe.model.config.moe_token_dispatcher_type = "alltoall"
         recipe.model.config.moe_enable_deepep = False
         recipe.model.config.moe_shared_expert_overlap = True
-        if USE_TOKEN_DROP:
-            recipe.trainer.callbacks.append(run.Config(MegatronTokenDropCallback))
+    recipe.model.config.moe_router_force_load_balancing = True
 
     # Performance optimization knobs
     recipe.model.config.moe_permute_fusion = True
