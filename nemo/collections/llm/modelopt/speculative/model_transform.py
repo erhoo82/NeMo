@@ -23,10 +23,6 @@ mto, HAVE_MODELOPT = safe_import("modelopt.torch.opt")
 mtsp, _ = safe_import("modelopt.torch.speculative")
 
 
-ALGORITHMS = {
-    "eagle3": mtsp.EAGLE3_DEFAULT_CFG,
-    # more TBD
-}
 
 
 def apply_speculative_decoding(model: nn.Module, algorithm: str = "eagle3") -> nn.Module:
@@ -41,6 +37,10 @@ def apply_speculative_decoding(model: nn.Module, algorithm: str = "eagle3") -> n
     Returns:
         The transformed model.
     """
+    ALGORITHMS = {
+        "eagle3": mtsp.EAGLE3_DEFAULT_CFG,
+        # more TBD
+    }
     if not HAVE_MODELOPT:
         raise ImportError("nvidia-modelopt is required to use Speculative Decoding")
 
