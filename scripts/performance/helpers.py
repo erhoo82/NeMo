@@ -51,8 +51,8 @@ def get_csv_configs(gpu: str, task: str, model_name: str, model_size: str, args)
             & (df["model"] == model_name)
             & (df["size"] == model_size)
             & (df["dtype"] == args.compute_dtype)
-            & (args.num_gpus is None or df['num_gpus'] == args.num_gpus)
         ]
+            #& (args.num_gpus is None or df['num_gpus'] == args.num_gpus)
         config_df = config_df.replace({nan: None})
         if len(config_df) == 0:
             logging.warning(f"Missing performance configs for {task}-{model_name}-{model_size}-{args.compute_dtype}")
@@ -424,6 +424,7 @@ def set_primary_perf_configs(
         use_user_buffer_registration=use_user_buffer_registration,
         use_sharp=use_sharp,
         keep_fsdp_fp8_transpose_cache=keep_fsdp_fp8_transpose_cache,
+        use_fsdp_double_buffer: bool = False,
     )
 
     return recipe
