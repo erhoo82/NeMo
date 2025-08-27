@@ -212,14 +212,18 @@ def set_precision_configs(recipe, compute_dtype: str, fp8_recipe: str | None = N
             fp8_recipe = "ds"
         if fp8_recipe.lower() == "ds":
             recipe.trainer.plugins = bf16_with_fp8_mixed()
+            recipe.optim.config.fp8_recipe = "delayed"
         elif fp8_recipe.lower() == "cs":
             recipe.trainer.plugins = bf16_with_fp8_current_scaling_mixed()
             # disable first/last layer bf16 for benchmarking
             recipe.trainer.plugins.first_last_layers_bf16 = False
+            recipe.optim.config.fp8_recipe = "tensorwise"
         elif fp8_recipe.lower() == "mxfp8":
             recipe.trainer.plugins = bf16_with_mxfp8_mixed()
+            recipe.optim.config.fp8_recipe = "mxfp8"
         elif fp8_recipe.lower() == "ss":
             recipe.trainer.plugins = bf16_with_fp8_subchannel_scaling_mixed()
+            recipe.optim.config.fp8_recipe = "blockwise"
 
     recipe.trainer.plugins.grad_reduce_in_fp32 = False
 
