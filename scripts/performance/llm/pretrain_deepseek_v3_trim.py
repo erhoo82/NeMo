@@ -86,8 +86,8 @@ def override_recipe_configs(
     recipe.model.config.apply_rope_fusion = True
     recipe.trainer.callbacks.append(run.Config(MegatronEnableExperimentalCallback))
 
-    recipe.model.config.num_layers = 24
-    recipe.model.config.moe_layer_freq = [0] * 2 + [1] * 22
+    recipe.model.config.num_layers = 25
+    recipe.model.config.moe_layer_freq = [0] * 3 + [1] * 22
 
     # Pipeline parallelism configs. We infer PP layout from the provided PP and VP size
     map_pp_vp_to_layout = {
