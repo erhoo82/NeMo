@@ -157,6 +157,13 @@ def override_recipe_configs(
         )
     recipe.model.tokenizer = recipe.data.tokenizer
 
+    # Use precision-aware optimzier for BF16 optimizer
+    recipe.optim.config.use_precision_aware_optimizer = True
+    recipe.optim.config.main_params_dtype = torch.float32
+    recipe.optim.config.main_grads_dtype = torch.bfloat16
+    recipe.optim.config.exp_avg_dtype = torch.bfloat16
+    recipe.optim.config.exp_avg_sq_dtype = torch.bfloat16
+
     return recipe
 
 
